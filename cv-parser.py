@@ -3,19 +3,21 @@ import docx2txt
 import PyPDF2
 import pandas as pd
 
+from extractors import extract_name, extract_skills
+
 def extract_data_from_word(doc_path):
     text = docx2txt.process(doc_path)
     # Extract relevant information like name and skills from 'text'
-    # Example: name = extract_name(text)
-    #         skills = extract_skills(text)
+    extract_name(text)
+    extract_skills(text)
     return name, skills
 
 def extract_data_from_pdf(pdf_path):
     # Use PyPDF2 or pdfplumber to extract text from PDF
     # Example: text = extract_text_from_pdf(pdf_path)
     # Extract relevant information like name and skills from 'text'
-    # Example: name = extract_name(text)
-    #         skills = extract_skills(text)
+    extract_name(text)
+    extract_skills(text)
     return name, skills
 
 # Iterate through CV files in a folder
