@@ -1,6 +1,6 @@
 import os
 import docx2txt
-import PyPDF2
+import pdfplumber
 import pandas as pd
 
 from extractors import extract_name, extract_skills
@@ -13,9 +13,11 @@ def extract_data_from_word(doc_path):
     return name, skills
 
 def extract_data_from_pdf(pdf_path):
-    # Use PyPDF2 or pdfplumber to extract text from PDF
-    # Example: text = extract_text_from_pdf(pdf_path)
-    # Extract relevant information like name and skills from 'text'
+    with pdfplumber.open(pdf_path) as pdf:
+        # Extract text from all pages of the PDF
+        text = ''
+        for page in pdf.pages:
+            text += page.extract_text()
     extract_name(text)
     extract_skills(text)
     return name, skills
