@@ -1,4 +1,9 @@
-FROM base-image # TODO: find image with python and java
+FROM python:3.10
+
+ENV JAVA_HOME=/opt/java/openjdk
+COPY --from=eclipse-temurin:21-jre $JAVA_HOME $JAVA_HOME
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
 RUN pip install resume-parser
 
 # Dependency of spacy
